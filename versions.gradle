@@ -1,0 +1,91 @@
+def build_versions = [:]
+build_versions.min_sdk = 16
+build_versions.target_sdk = 28
+build_versions.build_tools = "28.0.3"
+ext.build_versions = build_versions
+
+ext.deps = [:]
+def versions = [:]
+versions.android_gradle_plugin = "3.2.0"
+versions.support = "28.0.0"
+versions.lifecycle = "1.1.1"
+versions.room = "1.1.1"
+versions.retrofit = "2.3.0"
+versions.okhttp_logging_interceptor = "3.9.0"
+versions.glide = "4.7.1"
+versions.rxjava2 = "2.1.3"
+versions.rx_android = "2.0.1"
+versions.timber = "4.5.1"
+versions.snappydb = "0.5.2"
+versions.kryo = "2.24.0"
+versions.easyrecycle = "4.4.2"
+versions.gsyVideoPlayer = "6.0.1"
+versions.filedownloader = "1.7.5"
+
+def deps = [:]
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+
+
+def support = [:]
+support.app_compat = "com.android.support:appcompat-v7:$versions.support"
+support.recyclerview = "com.android.support:recyclerview-v7:$versions.support"
+support.design = "com.android.support:design:$versions.support"
+support.v4 = "com.android.support:support-v4:$versions.support"
+support.core_utils = "com.android.support:support-core-utils:$versions.support"
+deps.support = support
+
+def lifecycle = [:]
+lifecycle.runtime = "android.arch.lifecycle:runtime:$versions.lifecycle"
+lifecycle.extensions = "android.arch.lifecycle:extensions:$versions.lifecycle"
+lifecycle.java8 = "android.arch.lifecycle:common-java8:$versions.lifecycle"
+lifecycle.compiler = "android.arch.lifecycle:compiler:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+def arch_core = [:]
+arch_core.testing = "android.arch.core:core-testing:$versions.lifecycle"
+deps.arch_core = arch_core
+
+def room = [:]
+room.runtime = "android.arch.persistence.room:runtime:$versions.room"
+room.compiler = "android.arch.persistence.room:compiler:$versions.room"
+room.rxjava2 = "android.arch.persistence.room:rxjava2:$versions.room"
+room.testing = "android.arch.persistence.room:testing:$versions.room"
+deps.room = room
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+deps.retrofit = retrofit
+deps.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${versions.okhttp_logging_interceptor}"
+
+def glide = [:]
+glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide = glide
+
+def gsyVideoPlayer = [:]
+gsyVideoPlayer.java = "com.shuyu:gsyVideoPlayer-java:$versions.gsyVideoPlayer"
+gsyVideoPlayer.ex_so = "com.shuyu:gsyVideoPlayer-ex_so:$versions.gsyVideoPlayer"
+deps.gsyVideoPlayer = gsyVideoPlayer
+
+
+
+deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
+deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
+deps.timber = "com.jakewharton.timber:timber:$versions.timber"
+deps.snappydb = "com.snappydb:snappydb-lib:$versions.snappydb"
+deps.kryo = "com.esotericsoftware.kryo:kryo:$versions.kryo"
+deps.easyrecycle = "com.jude:easyrecyclerview:$versions.easyrecycle"
+deps.filedownloader = "com.liulishuo.filedownloader:library:$versions.filedownloader"
+
+ext.deps = deps
+
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    handler.maven { url 'https://jitpack.io' }
+}
+
+ext.addRepos = this.&addRepos
