@@ -7,7 +7,7 @@ public class XMLApiResult<T> extends ApiResult<T> {
     T result;//对应默认标准ApiResult的data
 
     @Override
-    public T getData() {
+    public T getBaseData() {
         return result;
     }
 

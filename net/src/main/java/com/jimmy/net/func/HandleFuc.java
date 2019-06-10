@@ -19,7 +19,7 @@ public class HandleFuc<T> implements Function<ApiResult<T>, T> {
     @Override
     public T apply(@NonNull ApiResult<T> tApiResult) throws Exception {
         if (ApiException.isOk(tApiResult)) {
-            return tApiResult.getData();// == null ? Optional.ofNullable(tApiResult.getData()).orElse(null) : tApiResult.getData();
+            return tApiResult.getBaseData();// == null ? Optional.ofNullable(tApiResult.getBaseData()).orElse(null) : tApiResult.getBaseData();
         } else {
             throw new ServerException(tApiResult.getCode(), tApiResult.getMsg());
         }

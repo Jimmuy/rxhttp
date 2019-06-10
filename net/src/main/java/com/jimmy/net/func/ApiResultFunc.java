@@ -75,13 +75,13 @@ public class ApiResultFunc<T> implements Function<ResponseBody, ApiResult<T>> {
                     String json = responseBody.string();
                     //增加是List<String>判断错误的问题
                     if (!List.class.isAssignableFrom(rawType) && clazz.equals(String.class)) {
-                        apiResult.setData((T) json);
+                        apiResult.setBaseData((T) json);
                         apiResult.setCode(0);
                         final Type type = Utils.getType(cls, 0);
                         ApiResult result = gson.fromJson(json, type);
                         if (result != null) {
                             apiResult = result;
-                            apiResult.setData((T) json);
+                            apiResult.setBaseData((T) json);
                         } else {
                             apiResult.setMsg("json is null");
                         }
@@ -98,7 +98,7 @@ public class ApiResultFunc<T> implements Function<ResponseBody, ApiResult<T>> {
                             result = new ApiResult();
                             T data = (T) xmlSerializer.read(clazz, json);
                             if (data != null) {
-                                result.setData(data);
+                                result.setBaseData(data);
                                 result.setCode(200);
                                 result.setMsg("success");
                             } else {
@@ -123,12 +123,12 @@ public class ApiResultFunc<T> implements Function<ResponseBody, ApiResult<T>> {
                 final String json = responseBody.string();
                 final Class<T> clazz = Utils.getClass(type, 0);
                 if (clazz.equals(String.class)) {
-                    //apiResult.setData((T) json);
+                    //apiResult.setBaseData((T) json);
                     //apiResult.setCode(0);
                     final ApiResult result = parseApiResult(json, apiResult);
                     if (result != null) {
                         apiResult = result;
-                        apiResult.setData((T) json);
+                        apiResult.setBaseData((T) json);
                     } else {
                         apiResult.setMsg("json is null");
                     }
@@ -136,9 +136,9 @@ public class ApiResultFunc<T> implements Function<ResponseBody, ApiResult<T>> {
                     final ApiResult result = parseApiResult(json, apiResult);
                     if (result != null) {
                         apiResult = result;
-                        if (apiResult.getData() != null) {
-                            T data = gson.fromJson(apiResult.getData().toString(), clazz);
-                            apiResult.setData(data);
+                        if (apiResult.getBaseData() != null) {
+                            T data = gson.fromJson(apiResult.getBaseData().toString(), clazz);
+                            apiResult.setBaseData(data);
                         } else {
                             apiResult.setMsg("ApiResult's data is null");
                         }
@@ -167,7 +167,7 @@ public class ApiResultFunc<T> implements Function<ResponseBody, ApiResult<T>> {
             apiResult.setCode(jsonObject.getInt("code"));
         }
         if (jsonObject.has("data")) {
-            apiResult.setData(jsonObject.getString("data"));
+            apiResult.setBaseData(jsonObject.getString("data"));
         }
         if (jsonObject.has("msg")) {
             apiResult.setMsg(jsonObject.getString("msg"));

@@ -8,7 +8,8 @@ package com.jimmy.net.model;
 public class ApiResult<T> {
     private int code;
     private String msg;
-    private T data;
+    private T baseData;
+
     public int getCode() {
         return code;
     }
@@ -25,12 +26,15 @@ public class ApiResult<T> {
         this.msg = msg;
     }
 
-    public T getData() {
-        return data;
+    /**
+     * 需要根据实际类型进行返回
+     */
+    public T getBaseData() {
+        return baseData;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void setBaseData(T baseData) {
+        this.baseData = baseData;
     }
 
     public boolean isOk() {
@@ -42,7 +46,7 @@ public class ApiResult<T> {
         return "ApiResult{" +
                 "code='" + code + '\'' +
                 ", msg='" + msg + '\'' +
-                ", data=" + data +
+                ", baseData=" + baseData +
                 '}';
     }
 }

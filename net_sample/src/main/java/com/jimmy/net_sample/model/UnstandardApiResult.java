@@ -5,7 +5,7 @@ import com.jimmy.net.model.ApiResult;
 public class UnstandardApiResult<T> extends ApiResult<T>{
      T data2;
     @Override
-    public T getData() {
+    public T getBaseData() {
         return data2;
     }
     @Override
