@@ -1,8 +1,6 @@
 
 package com.jimmy.net.callback;
 
-
-
 import com.jimmy.net.exception.ApiException;
 import com.jimmy.net.utils.Utils;
 

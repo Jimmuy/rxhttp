@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 
 
+import com.jimmy.net.HttpClient;
 import com.jimmy.net.callback.CallBackProxy;
 import com.jimmy.net.callback.DownloadProgressCallBack;
 import com.jimmy.net.callback.SimpleCallBack;
 import com.jimmy.net.exception.ApiException;
-import com.jimmy.net.model.JsonRequestParam;
-import com.jimmy.net.HttpClient;
 import com.jimmy.net.subsciber.BaseSubscriber;
 import com.jimmy.net.utils.HttpLog;
 import com.jimmy.net_sample.databinding.HomeActivityBinding;
@@ -118,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
     public void postJsonAsyn(View view) {
         HttpClient
                 .post("https://www.easy-mock.com/mock/5c515611b1c1b9153666e243/example/post/login/test")
-                .upJson(new JsonRequestParam("username", "admin"), new JsonRequestParam("password", "123"))
                 .execute(Object.class)
                 .subscribe(new BaseSubscriber<Object>() {
                     @Override

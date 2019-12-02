@@ -77,14 +77,6 @@ public class ApiResultFunc<T> implements Function<ResponseBody, ApiResult<T>> {
                     if (!List.class.isAssignableFrom(rawType) && clazz.equals(String.class)) {
                         apiResult.setBaseData((T) json);
                         apiResult.setCode(0);
-                        final Type type = Utils.getType(cls, 0);
-                        ApiResult result = gson.fromJson(json, type);
-                        if (result != null) {
-                            apiResult = result;
-                            apiResult.setBaseData((T) json);
-                        } else {
-                            apiResult.setMsg("json is null");
-                        }
                     } else {
                         ApiResult result = null;
                         if (isJson) {

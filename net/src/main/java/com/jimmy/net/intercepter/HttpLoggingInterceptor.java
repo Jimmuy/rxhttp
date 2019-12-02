@@ -214,7 +214,7 @@ public class HttpLoggingInterceptor implements Interceptor {
     }
 
 
-    public void e(java.lang.Throwable t) {
+    public void e(Throwable t) {
         if (isLogEnable) t.printStackTrace();
     }
 }

@@ -77,20 +77,20 @@ public class ApiException extends Exception {
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
             ex = new ApiException(httpException, httpException.code());
-            /*switch (httpException.code()) {
-                case BADREQUEST:
-                case UNAUTHORIZED:
-                case FORBIDDEN:
-                case NOT_FOUND:
-                case REQUEST_TIMEOUT:
-                case GATEWAY_TIMEOUT:
-                case INTERNAL_SERVER_ERROR:
-                case BAD_GATEWAY:
-                case SERVICE_UNAVAILABLE:
-                default:
-                    ex.message = "网络错误,Code:"+httpException.code()+" ,err:"+httpException.getMessage();
-                    break;
-            }*/
+//            switch (httpException.code()) {
+//                case BADREQUEST:
+//                case UNAUTHORIZED:
+//                case FORBIDDEN:
+//                case NOT_FOUND:
+//                case REQUEST_TIMEOUT:
+//                case GATEWAY_TIMEOUT:
+//                case INTERNAL_SERVER_ERROR:
+//                case BAD_GATEWAY:
+//                case SERVICE_UNAVAILABLE:
+//                default:
+//                    ex.message = "网络错误,Code:"+httpException.code()+" ,err:"+httpException.getMessage();
+//                    break;
+//            }
             ex.message = httpException.getMessage();
             return ex;
         } else if (e instanceof ServerException) {

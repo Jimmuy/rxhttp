@@ -5,7 +5,6 @@ import com.jimmy.net.body.ProgressResponseCallBack;
 import com.jimmy.net.body.RequestBodyUtils;
 import com.jimmy.net.body.UploadProgressRequestBody;
 import com.jimmy.net.model.HttpParams;
-import com.jimmy.net.model.JsonRequestParam;
 import com.jimmy.net.utils.GsonConverter;
 import com.jimmy.net.utils.Utils;
 
@@ -62,14 +61,14 @@ public abstract class BaseBodyRequest<R extends BaseBodyRequest> extends BaseReq
      */
     public R upString(String string) {
         this.string = string;
-        this.mediaType = okhttp3.MediaType.parse("text/plain");
+        this.mediaType = MediaType.parse("text/plain");
         return (R) this;
     }
 
     public R upString(String string, String mediaType) {
         this.string = string;
         Utils.checkNotNull(mediaType, "mediaType==null");
-        this.mediaType = okhttp3.MediaType.parse(mediaType);
+        this.mediaType = MediaType.parse(mediaType);
         return (R) this;
     }
 
@@ -93,16 +92,6 @@ public abstract class BaseBodyRequest<R extends BaseBodyRequest> extends BaseReq
         return upJson(GsonConverter.toJson(params));
     }
 
-    /**
-     * 注意使用该方法上传字符串会清空实体中其他所有的参数，头信息不清除
-     */
-    public R upJson(JsonRequestParam... jsonRequestParams) {
-        Map<String, Object> map = new HashMap<>();
-        for (JsonRequestParam param : jsonRequestParams) {
-            map.put(param.getKey(), param.getValue());
-        }
-        return upJson(GsonConverter.toJson(map));
-    }
 
     /**
      * 注意使用该方法上传字符串会清空实体中其他所有的参数，头信息不清除,必须是键值对的参数类型
@@ -168,7 +157,7 @@ public abstract class BaseBodyRequest<R extends BaseBodyRequest> extends BaseReq
         if (this.requestBody != null) { //自定义的请求体
             return apiManager.postBody(url, this.requestBody);
         } else if (this.json != null) {//上传的Json
-            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), this.json);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), this.json);
             return apiManager.postJson(url, body);
         } else if (this.object != null) {//自定义的请求object
             return apiManager.postBody(url, object);
@@ -176,7 +165,7 @@ public abstract class BaseBodyRequest<R extends BaseBodyRequest> extends BaseReq
             RequestBody body = RequestBody.create(mediaType, this.string);
             return apiManager.postBody(url, body);
         } else if (this.bs != null) {//上传的字节数据
-            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/octet-stream"), this.bs);
+            RequestBody body = RequestBody.create(MediaType.parse("application/octet-stream"), this.bs);
             return apiManager.postBody(url, body);
         }
         if (params.fileParamsMap.isEmpty()) {

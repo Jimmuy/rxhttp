@@ -7,8 +7,6 @@ import com.google.gson.reflect.TypeToken;
 import com.jimmy.net.callback.CallBack;
 import com.jimmy.net.callback.CallBackProxy;
 import com.jimmy.net.callback.CallClazzProxy;
-import com.jimmy.net.callback.SimpleCallBack;
-import com.jimmy.net.exception.ApiException;
 import com.jimmy.net.func.ApiResultFunc;
 import com.jimmy.net.func.RetryExceptionFunc;
 import com.jimmy.net.model.ApiResult;

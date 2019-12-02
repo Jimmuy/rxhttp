@@ -50,7 +50,7 @@ public abstract class BaseSubscriber<T> extends DisposableObserver<T> {
     }
 
     @Override
-    public final void onError(java.lang.Throwable e) {
+    public final void onError(Throwable e) {
         HttpLog.e("-->http is onError");
         if (e instanceof ApiException) {
             HttpLog.e("--> e instanceof ApiException err:" + e);

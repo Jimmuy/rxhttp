@@ -2,7 +2,7 @@ package com.jimmy.net_sample.model;
 
 import com.jimmy.net.model.ApiResult;
 
-public class UnstandardApiResult<T> extends ApiResult<T>{
+public class UnstandardApiResult<T> extends ApiResult<T> {
      T data2;
     @Override
     public T getBaseData() {
